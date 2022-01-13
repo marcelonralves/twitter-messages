@@ -52,11 +52,11 @@
     <h1 class="visually-hidden">Heroes examples</h1>
 
     <div class="px-4 py-5 my-5 text-center">
-
+        <div class='responseAlert alert  alert-danger d-none' role='alert'></div>
         <h1 class="display-5 fw-bold">Centered hero</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-            <form method="post" action="{{ route('sendTweet') }}">
+            <form method="post" name="formSubmit" action="{{ route('sendTweet') }}">
                 @csrf
                 <div class="form-floating mb-4">
                     <textarea class="form-control" placeholder="Leave a comment here" name="message" id="message" style="height: 100px"></textarea>
@@ -72,7 +72,30 @@
 </main>
 
 <script src="/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+    $(function() {
+        $('form[name="formSubmit"]').submit(function(event) {
+            event.preventDefault();
 
+            $.ajax({
+                url : $(this).attr('action'),
+                type : "post",
+                data : $(this).serialize(),
+                dataType : "json",
+                success : function(response) {
+                    if(response.status === true) {
+                        $('.responseAlert').removeClass('d-none').html(response.message);
+                    } else {
+                        console.log(response.message);
+                        $('.responseAlert').removeClass('d-none').html(response.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
