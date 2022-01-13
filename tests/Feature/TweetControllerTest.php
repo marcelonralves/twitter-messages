@@ -16,7 +16,7 @@ class TweetControllerTest extends TestCase
     {
         $response = $this->post('/send');
 
-        $response->assertStatus(302);
+        $response->assertStatus(400);
     }
 
     public function testCheckIfUserSendATweetMoreThan120Characters()
@@ -27,12 +27,20 @@ class TweetControllerTest extends TestCase
 
         $response = $this->post('/send', $payload);
 
-        $response->assertStatus(302);
+        $response->assertStatus(400);
+    }
+
+    public function testCheckIfUserIsSedingTheSameMessage()
+    {
+        $payload = ["message" => "hello world"]; // this message is already tweeted
+        $response = $this->post('/send', $payload);
+
+        $response->assertStatus(400);
     }
 
     public function testCheckIfUserSendMessage()
     {
-        $payload = ["message" => "hello world"];
+        $payload = ["message" => time()];
         $response = $this->post('/send', $payload);
 
         $response->assertStatus(200);

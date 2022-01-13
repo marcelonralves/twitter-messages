@@ -49,13 +49,13 @@
 <body>
 
 <main>
-    <h1 class="visually-hidden">Heroes examples</h1>
 
     <div class="px-4 py-5 my-5 text-center">
         <div class='responseAlert alert  alert-danger d-none' role='alert'></div>
-        <h1 class="display-5 fw-bold">Centered hero</h1>
+        <h1 class="display-5 fw-bold">Mande seu Recado!</h1>
         <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+            <p class="lead mb-4">Quer mandar um recado para alguém no Twitter? De forma anônima? Basta escrever a
+            mensagem no campo abaixo e clicar em enviar!</p>
             <form method="post" name="formSubmit" action="{{ route('sendTweet') }}">
                 @csrf
                 <div class="form-floating mb-4">
@@ -63,7 +63,7 @@
                     <label for="message">Deixe sua mensagem aqui</label>
                 </div>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Enviar</button>
+                    <button type="submit" class="buttonSubmit btn btn-primary btn-lg px-4 gap-3">Enviar</button>
                 </div>
             </form>
         </div>
@@ -78,6 +78,7 @@
     $(function() {
         $('form[name="formSubmit"]').submit(function(event) {
             event.preventDefault();
+            $('.buttonSubmit').attr("disabled", true).html("Enviando...");
 
             $.ajax({
                 url : $(this).attr('action'),
@@ -87,9 +88,10 @@
                 success : function(response) {
                     if(response.status === true) {
                         $('.responseAlert').removeClass('d-none').html(response.message);
+                        $('.buttonSubmit').attr("disabled", false).html("Enviar");
                     } else {
-                        console.log(response.message);
                         $('.responseAlert').removeClass('d-none').html(response.message);
+                        $('.buttonSubmit').attr("disabled", false).html("Enviar");
                     }
                 }
             });
