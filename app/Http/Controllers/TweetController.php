@@ -22,7 +22,7 @@ class TweetController extends Controller
             $twitter = new Twitter(env("TWITTER_CONSUMER_KEY"), env("TWITTER_CONSUMER_SECRET"),
                 env("TWITTER_ACCESS_TOKEN"), env("TWITTER_ACCESS_TOKEN_SECRET"));
             $twitter->send($request->message);
-            return response()->json(["status" => true, "message" => "Recado enviado com sucesso!"], 200);
+            return response()->json(["status" => true, "message" => "Recado enviado com sucesso!"]);
 
         } catch (Exception $e) {
 

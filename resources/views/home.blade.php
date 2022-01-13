@@ -1,20 +1,20 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Heroes · Bootstrap v5.1</title>
+    <title>Recados Twitter</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/heroes/">
 
 
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,18 +44,19 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="/css/heroes.css" rel="stylesheet">
+    <link href="/public/css/heroes.css" rel="stylesheet">
 </head>
 <body>
 
 <main>
 
     <div class="px-4 py-5 my-5 text-center">
-        <div class='responseAlert alert  alert-danger d-none' role='alert'></div>
+        <div class='responseAlert alert d-none' role='alert'></div>
         <h1 class="display-5 fw-bold">Mande seu Recado!</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Quer mandar um recado para alguém no Twitter? De forma anônima? Basta escrever a
-            mensagem no campo abaixo e clicar em enviar!</p>
+                mensagem no campo abaixo e clicar em enviar!</p>
+            <p class="lead mb-4">Para ver os recados basta ver o perfil <a href="https://twitter.com/recanonimos_" target="_blank">@recanonimos_</a></p>
             <form method="post" name="formSubmit" action="{{ route('sendTweet') }}">
                 @csrf
                 <div class="form-floating mb-4">
@@ -88,9 +89,12 @@
                 success : function(response) {
                     if(response.status === true) {
                         $('.responseAlert').removeClass('d-none').html(response.message);
+                        $('.responseAlert').addClass("alert-success");
                         $('.buttonSubmit').attr("disabled", false).html("Enviar");
+
                     } else {
                         $('.responseAlert').removeClass('d-none').html(response.message);
+                        $('.responseAlert').addClass("alert-danger");
                         $('.buttonSubmit').attr("disabled", false).html("Enviar");
                     }
                 }
