@@ -14,7 +14,7 @@ próprio Twitter.
 
 ## Stack utilizada
 
-**Front-end:** Bootstrap + Ajax (jQuery)
+**Front-end:** Bootstrap + Livewire
 
 **Back-end:** Laravel (PHP)
 
