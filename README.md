@@ -7,7 +7,7 @@ poderiam enviar recado de forma anônima para os usuários do
 próprio Twitter. 
 
 # Ver na prática
-[Clique aqui](https://twitter.clinicamedclinic.com.br/public/) para testar 
+[Clique aqui](https://mysterious-garden-81036.herokuapp.com/) para testar 
 
 
 
